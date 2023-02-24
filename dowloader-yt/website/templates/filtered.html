@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="filtered">
+        <h1>Video Downloader</h1>
+        <h2>{{url.title}}</h2>
+        <form action="{{url_for('views.filtered')}}" method="post">
+            <label for="format">Select Format:</label>
+            <select name="file_format" id="format">
+                {% if mp3 > 0 %} 
+                    <option value="mp3">MP3</option>
+                {% endif %}
+                {% if mp4 > 0 %}
+                    <option value="mp4">MP4</option>
+                {% endif %}
+            </select>
+            <div class="box-select">
+                <input type="submit" value="Carry on" name="submit_button">
+                <button type="button"><a href="{{url_for('views.index')}}">Go back</a></button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+

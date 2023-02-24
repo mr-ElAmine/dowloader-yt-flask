@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="index">
+    <h1>Video Downloader</h1>
+    <div class="box">
+      <form method="post">
+        {{ form.hidden_tag() }}
+        <label for="link">YouTube video link:</label>
+        <input type="text" id="link" name="link" placeholder="Enter your link here...">
+        {% if error or form.link.errors %}
+          <p class="error">
+            {% if error %}
+              {{ error }}
+            {% endif %}
+            {% for error in form.link.errors %}
+              {{ error }}
+            {% endfor %}
+          </p>
+        {% endif %}
+        <input type="submit" value="Carry on" id="submit_button" name="submit_button">
+      </form>
+    </div>
+  </div>
+{% endblock %}

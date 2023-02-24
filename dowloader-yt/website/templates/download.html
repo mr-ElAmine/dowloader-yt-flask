@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="download">
+        <h1>Video Downloader</h1>
+        <h2>{{url.title}}</h2>
+        <form action="{{url_for('views.download_yt')}}" method="post">
+            {% if file_format == "mp3" %}
+                <label for="audio_quality">Select Audio Quality:</label>
+                <select name="audio_quality" id="audio_quality">
+                    {% for i in url.streams.filter(only_audio=True, file_extension="mp3") %}
+                        <option value="{{i.abr}}">{{i.abr}}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+            {% if file_format == "mp4" %}
+                <label for="video_resolution">Select Video Resolution:</label>
+                <select name="video_resolution" id="video_resolution">
+                    {% for i in url.streams.filter(file_extension="mp4", progressive=True) %}
+                        <option value="{{i.resolution}}">{{i.resolution}}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+            <div class="box-select">
+                <input type="submit" value="Download" name="submit_button">
+                <button type="button"><a href="{{url_for('views.index')}}">home</a></button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
